@@ -16,5 +16,14 @@ public class MessageStore : IMessageStore
         }
     }
 
-    public IEnumerable<StoredMessage> Messages => _messages;
+    public IEnumerable<StoredMessage> Messages
+    {
+        get
+        {
+            lock (_lock)
+            {
+                return _messages;
+            }
+        }
+    }
 }

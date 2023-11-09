@@ -6,9 +6,6 @@ public class TslMessageValidator : ITslMessageValidator
 {
     public bool Validate(TslMessage message)
     {
-        if (string.IsNullOrEmpty(message.Team))
-            throw new ArgumentException("Team is empty");
-
         if (string.IsNullOrEmpty(message.MessageType))
             throw new ArgumentException("MessageType is empty");
 

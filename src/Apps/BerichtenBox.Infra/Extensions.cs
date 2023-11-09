@@ -10,7 +10,6 @@ public static class Extensions
         {
             MessageType = message.MessageType,
             SubjectId = message.SubjectId,
-            Team = message.Team,
             Url = message.Url
         };
     }

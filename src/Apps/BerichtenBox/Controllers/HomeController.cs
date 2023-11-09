@@ -17,10 +17,10 @@ namespace BerichtenBox.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index(string? team)
+        public IActionResult Index()
         {
             var model = new MessageListViewModel();
-            model.Messages = GetMessages(team);
+            model.Messages = GetMessages();
             
             return View(model);
         }
@@ -31,13 +31,9 @@ namespace BerichtenBox.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        private IEnumerable<MessageViewModel> GetMessages(string? team)
+        private IEnumerable<MessageViewModel> GetMessages()
         {
-            var result = string.IsNullOrWhiteSpace(team) 
-                ? _messageStore.Messages 
-                : _messageStore.Messages.Where(x => x.Team.Equals(team, StringComparison.OrdinalIgnoreCase));
-
-            return result.OrderBy(m => m.TimeStamp).Select(Convert);
+            return _messageStore.Messages.OrderBy(m => m.TimeStamp).Select(Convert);
         }
 
         private MessageViewModel Convert(StoredMessage message)
@@ -46,7 +42,6 @@ namespace BerichtenBox.Controllers
             {
                 MessageType = message.MessageType,
                 Subject = message.SubjectId,
-                Team = message.Team,
                 Url = message.Url
             };
         }

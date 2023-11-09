@@ -4,10 +4,6 @@ namespace BerichtenBox.Models;
 
 public class MessageViewModel
 {
-    [DisplayName("Team")] 
-    [ReadOnly(true)] 
-    public string Team { get; set; } = string.Empty;
-
     [DisplayName("Aanvrager id")]
     [ReadOnly(true)]
     public string Subject { get; set; } = string.Empty;
